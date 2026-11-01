@@ -1,81 +1,99 @@
-/* Layout: single narrow column, two big guess buttons side by side; steam-mist neutrals with boy/girl as the only strong colors */
+/* Layout: one narrow column; sunny duck-pond palette, confetti dots on the page, boy blue vs bubblegum pink as the two big choices */
 :root {
-  --bg: #f1f4f3;
+  --bg: #fff4c7;
+  --dot-1: #ffd9e3;
+  --dot-2: #cfe6ff;
+  --dot-3: #ffe08a;
   --surface: #ffffff;
-  --ink: #1f2b29;
-  --muted: #5d6b68;
-  --line: #d9e1df;
-  --boy: #2f6fb8;
-  --boy-soft: #e3eefa;
-  --girl: #c94a6e;
-  --girl-soft: #fae6ec;
-  --jade: #2c7a69;
-  --jade-soft: #e1f0ec;
-  --danger: #b3261e;
+  --ink: #2b2350;
+  --muted: #6a6189;
+  --line: #f0dfa6;
+  --boy: #2e6fd8;
+  --boy-soft: #dcebff;
+  --girl: #f2456f;
+  --girl-soft: #ffe0e8;
+  --sun: #ff8a1f;
+  --spring: #12a594;
+  --spring-soft: #d7f5ef;
+  --danger: #c62828;
   --font-display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-  --radius: 14px;
+  --radius: 20px;
+  --shadow: 0 6px 0 rgba(43, 35, 80, .08);
+  color-scheme: light; /* one sunny look on purpose, in light and dark mode alike */
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141a19; --surface: #1d2523; --ink: #e8efed; --muted: #9db0ab; --line: #2f3b38;
-    --boy: #7fb0ec; --boy-soft: #1b2a3c; --girl: #f08aa8; --girl-soft: #3a1e28;
-    --jade: #6cc4ad; --jade-soft: #1a302a; --danger: #ff8a80;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #141a19; --surface: #1d2523; --ink: #e8efed; --muted: #9db0ab; --line: #2f3b38;
-  --boy: #7fb0ec; --boy-soft: #1b2a3c; --girl: #f08aa8; --girl-soft: #3a1e28;
-  --jade: #6cc4ad; --jade-soft: #1a302a; --danger: #ff8a80;
-  color-scheme: dark;
-}
-
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 20px 20px, var(--dot-1) 6px, transparent 7px),
+    radial-gradient(circle at 70px 60px, var(--dot-2) 5px, transparent 6px),
+    radial-gradient(circle at 110px 15px, var(--dot-3) 4px, transparent 5px);
+  background-size: 140px 90px;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.7;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 32px 48px;
+  padding-block: 24px 48px;
 }
-main { max-width: 560px; margin: 0 auto; display: grid; gap: 28px; }
+main { max-width: 560px; margin: 0 auto; display: grid; gap: 24px; }
 main.wide { max-width: 860px; }
 
 h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.3; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); }
-h2 { font-size: 1.35rem; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+h2 { font-size: 1.4rem; }
 p { margin: 0; }
 .muted { color: var(--muted); }
-.eyebrow { font-size: .8rem; letter-spacing: .12em; color: var(--jade); font-weight: 700; }
+.eyebrow {
+  justify-self: start; font-size: .82rem; letter-spacing: .1em; font-weight: 700;
+  color: var(--surface); background: var(--sun); border-radius: 999px; padding: 2px 12px;
+}
 
-header.hero { display: grid; gap: 10px; }
-.hero .lede { color: var(--muted); max-width: 34em; }
+/* hero with duck */
+header.hero {
+  display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center;
+  background: var(--surface); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+}
+.hero-text { display: grid; gap: 10px; min-width: 0; }
+.hero .lede { color: var(--muted); }
+.name { color: var(--sun); }
+.name .b { color: var(--boy); }
+.name .g { color: var(--girl); }
+.duck { width: clamp(96px, 26vw, 150px); height: auto; animation: bob 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+.duck-wrap { position: relative; display: grid; justify-items: center; }
+.bubble {
+  font-family: var(--font-display); font-size: .9rem; background: var(--ink); color: var(--surface);
+  border-radius: 14px; padding: 2px 10px; white-space: nowrap; position: relative; margin-bottom: 6px;
+}
+.bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  border: 6px solid transparent; border-bottom: 0; border-top-color: var(--ink);
+}
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-6px) rotate(2deg) } }
 
 .prize {
   display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center;
-  background: var(--jade-soft); border-radius: var(--radius); padding: 14px 18px;
+  background: var(--spring-soft); border-radius: var(--radius); padding: 14px 18px;
 }
-.prize svg { width: 40px; height: 40px; color: var(--jade); }
-.prize strong { font-family: var(--font-display); font-weight: 400; font-size: 1.1rem; color: var(--jade); }
+.prize svg { width: 42px; height: 42px; color: var(--spring); }
+.prize strong { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--spring); }
 .prize p { font-size: .92rem; }
 
-form { display: grid; gap: 22px; }
+form { display: grid; gap: 22px; background: var(--surface); border-radius: var(--radius); padding: 22px 20px; box-shadow: var(--shadow); }
 .field { display: grid; gap: 8px; }
 label, legend { font-weight: 700; }
 .hint { font-weight: 400; color: var(--muted); font-size: .88rem; }
 input[type="text"], textarea {
-  width: 100%; font: inherit; color: var(--ink); background: var(--surface);
-  border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  width: 100%; font: inherit; color: var(--ink); background: var(--bg);
+  border: 2px solid var(--line); border-radius: 12px; padding: 12px 14px;
 }
 textarea { min-height: 120px; resize: vertical; }
 input:focus-visible, textarea:focus-visible, button:focus-visible, .guess input:focus-visible + span {
-  outline: 3px solid var(--jade); outline-offset: 2px;
+  outline: 3px solid var(--sun); outline-offset: 2px;
 }
 fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
 
@@ -83,57 +101,70 @@ fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
 .guess { position: relative; cursor: pointer; }
 .guess input { position: absolute; opacity: 0; pointer-events: none; }
 .guess span {
-  display: grid; justify-items: center; gap: 4px; padding: 22px 8px 18px;
-  border-radius: var(--radius); border: 2px solid var(--line); background: var(--surface);
-  font-family: var(--font-display); font-size: 1.4rem; transition: transform .15s, border-color .15s, background .15s;
+  display: grid; justify-items: center; gap: 2px; padding: 20px 8px 16px;
+  border-radius: var(--radius); border: 3px solid transparent;
+  font-family: var(--font-display); font-size: 1.45rem; transition: transform .15s, border-color .15s, box-shadow .15s;
 }
+.guess.boy span { background: var(--boy-soft); color: var(--boy); }
+.guess.girl span { background: var(--girl-soft); color: var(--girl); }
 .guess small { font-family: var(--font-body); font-size: .8rem; color: var(--muted); }
 .guess .glyph { font-size: 2.4rem; line-height: 1; }
-.guess.boy .glyph { color: var(--boy); }
-.guess.girl .glyph { color: var(--girl); }
-.guess:hover span { transform: translateY(-2px); }
-.guess.boy input:checked + span { border-color: var(--boy); background: var(--boy-soft); }
-.guess.girl input:checked + span { border-color: var(--girl); background: var(--girl-soft); }
+.guess:hover span { transform: translateY(-3px) rotate(-1deg); }
+.guess.boy input:checked + span { border-color: var(--boy); box-shadow: 0 6px 0 var(--boy); transform: translateY(-3px); }
+.guess.girl input:checked + span { border-color: var(--girl); box-shadow: 0 6px 0 var(--girl); transform: translateY(-3px); }
 
 button.primary {
-  font: inherit; font-weight: 700; font-size: 1.05rem; border: 0; cursor: pointer;
-  background: var(--ink); color: var(--bg); border-radius: 999px; padding: 14px 20px;
+  font: inherit; font-family: var(--font-display); font-size: 1.2rem; border: 0; cursor: pointer;
+  background: var(--sun); color: #fff; border-radius: 999px; padding: 14px 20px;
+  box-shadow: 0 5px 0 #d06a0a; transition: transform .1s, box-shadow .1s;
 }
+button.primary:active { transform: translateY(3px); box-shadow: 0 2px 0 #d06a0a; }
 button.primary:disabled { opacity: .55; cursor: wait; }
 button.ghost {
-  font: inherit; background: transparent; color: var(--ink); cursor: pointer;
-  border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px;
+  font: inherit; background: var(--surface); color: var(--ink); cursor: pointer;
+  border: 2px solid var(--line); border-radius: 999px; padding: 8px 16px;
 }
 .error { color: var(--danger); font-weight: 700; }
-.notice { background: var(--surface); border: 1.5px dashed var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.notice { background: var(--surface); border: 2px dashed var(--sun); border-radius: var(--radius); padding: 14px 16px; }
 
-.thanks { display: grid; gap: 14px; text-align: left; }
+.thanks { display: grid; gap: 14px; background: var(--surface); border-radius: var(--radius); padding: 22px 20px; box-shadow: var(--shadow); }
 
 /* tally bar */
 .tally { display: grid; gap: 8px; }
-.tally-labels { display: flex; justify-content: space-between; font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.tally-labels { display: flex; justify-content: space-between; font-family: var(--font-display); font-size: 1.2rem; font-variant-numeric: tabular-nums; }
 .tally-labels .b { color: var(--boy); }
 .tally-labels .g { color: var(--girl); }
-.bar { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: var(--line); }
+.bar { display: flex; height: 22px; border-radius: 999px; overflow: hidden; background: var(--line); }
 .bar .b { background: var(--boy); transition: width .6s; }
 .bar .g { background: var(--girl); transition: width .6s; }
 
 .reasons { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .reasons li {
-  background: var(--surface); border-radius: 12px; padding: 12px 14px; border-left: 4px solid var(--line);
-  min-width: 0; overflow-wrap: anywhere;
+  border-radius: 16px; padding: 12px 14px; min-width: 0; overflow-wrap: anywhere; background: var(--bg);
 }
-.reasons li.boy { border-left-color: var(--boy); }
-.reasons li.girl { border-left-color: var(--girl); }
+.reasons li.boy { background: var(--boy-soft); }
+.reasons li.girl { background: var(--girl-soft); }
 .reasons .who { font-weight: 700; }
-.reasons .tag { font-size: .8rem; font-weight: 700; margin-left: 6px; }
-.reasons li.boy .tag { color: var(--boy); }
-.reasons li.girl .tag { color: var(--girl); }
+.reasons .tag { font-size: .8rem; font-weight: 700; margin-left: 6px; border-radius: 999px; padding: 1px 8px; color: #fff; }
+.reasons li.boy .tag { background: var(--boy); }
+.reasons li.girl .tag { background: var(--girl); }
 .reasons .reason { white-space: pre-wrap; }
 .reasons .when { font-size: .78rem; color: var(--muted); }
 
-footer { text-align: center; font-size: .82rem; color: var(--muted); }
+footer { text-align: center; font-size: .85rem; color: var(--muted); }
 
+/* confetti */
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 20; }
+.confetti i {
+  position: absolute; top: -12px; width: 9px; height: 14px; border-radius: 2px;
+  animation: fall linear forwards;
+}
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+@media (max-width: 420px) {
+  header.hero { grid-template-columns: 1fr; }
+  .duck-wrap { grid-row: 1; }
+}
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

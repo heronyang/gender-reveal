@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" role="img" aria-label="戴水手帽的小鴨">
+  <!-- ground shadow -->
+  <ellipse cx="100" cy="196" rx="56" ry="8" fill="#000" opacity=".08"/>
+  <!-- feet -->
+  <path d="M74 184c-10 0-16 6-14 9h28c2-4-4-9-14-9z" fill="#FF8A1F"/>
+  <path d="M126 184c-10 0-16 6-14 9h28c2-4-4-9-14-9z" fill="#FF8A1F"/>
+  <!-- body -->
+  <ellipse cx="100" cy="148" rx="58" ry="44" fill="#FFD43B"/>
+  <ellipse cx="100" cy="160" rx="38" ry="26" fill="#FFE47A"/>
+  <!-- wings -->
+  <path d="M44 140c-12 4-16 20-6 28 8-2 16-10 18-22z" fill="#F7C21B"/>
+  <path d="M156 140c12 4 16 20 6 28-8-2-16-10-18-22z" fill="#F7C21B"/>
+  <!-- bow tie -->
+  <path d="M100 114l-20-10v22zM100 114l20-10v22z" fill="#FF4F6D"/>
+  <circle cx="100" cy="114" r="6" fill="#E23A58"/>
+  <!-- head -->
+  <circle cx="100" cy="72" r="46" fill="#FFD43B"/>
+  <!-- tuft -->
+  <path d="M104 28c-2-10 6-16 12-14-6 2-6 8-2 12-8-2-8 4-10 2z" fill="#F7C21B"/>
+  <!-- sailor cap -->
+  <g transform="rotate(-10 100 34)">
+    <path d="M66 40c4-18 64-18 68 0z" fill="#2E6FD8"/>
+    <rect x="62" y="38" width="76" height="9" rx="4.5" fill="#fff"/>
+    <path d="M136 42l14 10-4 4-12-8z" fill="#FF4F6D"/>
+    <circle cx="100" cy="22" r="4" fill="#fff"/>
+  </g>
+  <!-- eyes -->
+  <ellipse cx="82" cy="70" rx="8" ry="10" fill="#2B2350"/>
+  <ellipse cx="118" cy="70" rx="8" ry="10" fill="#2B2350"/>
+  <circle cx="85" cy="66" r="3" fill="#fff"/>
+  <circle cx="121" cy="66" r="3" fill="#fff"/>
+  <!-- cheeks -->
+  <ellipse cx="68" cy="88" rx="9" ry="6" fill="#FF7FA0" opacity=".55"/>
+  <ellipse cx="132" cy="88" rx="9" ry="6" fill="#FF7FA0" opacity=".55"/>
+  <!-- beak -->
+  <ellipse cx="100" cy="92" rx="20" ry="9" fill="#FF8A1F"/>
+  <ellipse cx="100" cy="100" rx="13" ry="6" fill="#F06A00"/>
+</svg>

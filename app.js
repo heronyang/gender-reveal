@@ -55,3 +55,21 @@ function renderReasons(ul, votes) {
     ul.append(li);
   });
 }
+
+// 彩色紙花
+function confetti(count = 80) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const colors = ["#ff4f6d", "#2e6fd8", "#ffd43b", "#ff8a1f", "#12a594", "#b07cff"];
+  const box = document.createElement("div");
+  box.className = "confetti";
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("i");
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = colors[i % colors.length];
+    p.style.animationDuration = 1.8 + Math.random() * 1.6 + "s";
+    p.style.animationDelay = Math.random() * 0.5 + "s";
+    box.append(p);
+  }
+  document.body.append(box);
+  setTimeout(() => box.remove(), 4500);
+}
