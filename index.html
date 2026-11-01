@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>寶寶性別大猜謎</title>
+<meta name="description" content="猜猜寶寶是男生還是女生？猜對就有機會抽中煙波大飯店溫泉住宿券！">
+<meta property="og:title" content="寶寶性別大猜謎 💙🩷">
+<meta property="og:description" content="猜猜寶寶是男生還是女生？猜對就有機會抽中煙波大飯店溫泉住宿券！">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <p class="eyebrow">寶寶性別大猜謎</p>
+    <h1>是男寶，還是女寶？</h1>
+    <p class="lede">我們家的新成員就快揭曉了！請投下你的一票，並告訴我們你為什麼這樣猜。夢到的、看肚子形狀的、純靠直覺的都可以。</p>
+  </header>
+
+  <section class="prize" aria-label="獎品">
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 30c3 3 7 4 14 4s11-1 14-4"/>
+      <path d="M4 26h32"/>
+      <path d="M13 20c-2-3 2-5 0-8s2-5 0-8"/>
+      <path d="M20 20c-2-3 2-5 0-8s2-5 0-8"/>
+      <path d="M27 20c-2-3 2-5 0-8s2-5 0-8"/>
+    </svg>
+    <div>
+      <strong>猜對的人可參加抽獎</strong>
+      <p>獎品：煙波大飯店溫泉住宿券一張</p>
+    </div>
+  </section>
+
+  <div id="setup" class="notice" hidden>
+    <p><strong>網站尚未完成設定。</strong>請到 <code>config.js</code> 填入 Google Apps Script 的網址。</p>
+  </div>
+
+  <form id="vote-form" novalidate>
+    <div class="field">
+      <label for="name">你的名字 <span class="hint">（抽獎時用來找到你）</span></label>
+      <input id="name" name="name" type="text" maxlength="40" autocomplete="name" placeholder="例如：阿嬤、小舅、王大明" required>
+    </div>
+
+    <fieldset>
+      <legend>你猜寶寶是…</legend>
+      <div class="guesses">
+        <label class="guess boy">
+          <input type="radio" name="guess" id="guess-boy" value="boy" required>
+          <span><b class="glyph" aria-hidden="true">♂</b>男寶<small>小王子</small></span>
+        </label>
+        <label class="guess girl">
+          <input type="radio" name="guess" id="guess-girl" value="girl">
+          <span><b class="glyph" aria-hidden="true">♀</b>女寶<small>小公主</small></span>
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="reason">為什麼這樣猜？ <span class="hint">（越有趣越好！）</span></label>
+      <textarea id="reason" name="reason" maxlength="500" placeholder="例如：媽媽最近超愛吃酸的，酸兒辣女！" required></textarea>
+    </div>
+
+    <p id="form-error" class="error" role="alert" hidden></p>
+    <button id="submit" class="primary" type="submit">送出我的一票</button>
+    <p class="muted" style="font-size:.85rem">每人一票。用同一個名字再投一次，會更新你原本的答案。</p>
+  </form>
+
+  <section id="thanks" class="thanks" hidden aria-live="polite">
+    <h2 id="thanks-title">收到你的一票了！</h2>
+    <p id="thanks-body" class="muted"></p>
+    <div id="tally" class="tally"></div>
+    <h3 id="reasons-title" hidden>大家的理由</h3>
+    <ul id="reasons" class="reasons"></ul>
+    <button id="again" class="ghost" type="button">修改我的答案</button>
+  </section>
+
+  <footer>揭曉之後，我們會從猜對的人當中抽出一位得主 🎉</footer>
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  const form = document.getElementById("vote-form");
+  const errEl = document.getElementById("form-error");
+  const btn = document.getElementById("submit");
+  const thanks = document.getElementById("thanks");
+
+  if (!window.VOTE_API_URL) {
+    document.getElementById("setup").hidden = false;
+    btn.disabled = true;
+  }
+
+  // 記住這台裝置上次填的內容（方便修改）
+  try {
+    const saved = JSON.parse(localStorage.getItem("gr-vote") || "null");
+    if (saved) {
+      form.name.value = saved.name || "";
+      form.reason.value = saved.reason || "";
+      const r = document.getElementById("guess-" + saved.guess);
+      if (r) r.checked = true;
+    }
+  } catch (e) {}
+
+  function showError(msg) { errEl.textContent = msg; errEl.hidden = false; }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errEl.hidden = true;
+    const vote = {
+      name: form.name.value.trim(),
+      guess: (form.querySelector('input[name="guess"]:checked') || {}).value,
+      reason: form.reason.value.trim(),
+    };
+    if (!vote.name) return showError("請填寫你的名字。"), form.name.focus();
+    if (!vote.guess) return showError("請選擇男寶或女寶。");
+    if (!vote.reason) return showError("請寫一句你的理由，讓大家笑一下！"), form.reason.focus();
+
+    btn.disabled = true; btn.textContent = "送出中…";
+    try {
+      const result = await submitVote(vote);
+      try { localStorage.setItem("gr-vote", JSON.stringify(vote)); } catch (e) {}
+      document.getElementById("thanks-title").textContent = result.updated ? "已更新你的答案！" : "收到你的一票了！";
+      document.getElementById("thanks-body").textContent =
+        `${vote.name}，你猜的是「${LABEL[vote.guess]}」。揭曉那天見分曉！`;
+      form.hidden = true;
+      thanks.hidden = false;
+      if (window.SHOW_RESULTS_AFTER_VOTE) {
+        try {
+          const votes = await fetchVotes();
+          renderTally(document.getElementById("tally"), votes);
+          document.getElementById("reasons-title").hidden = false;
+          renderReasons(document.getElementById("reasons"), votes);
+        } catch (e) { /* 票已送出，讀取結果失敗不影響 */ }
+      }
+    } catch (err) {
+      showError("送出失敗：" + err.message + "。請檢查網路後再試一次。");
+    } finally {
+      btn.disabled = false; btn.textContent = "送出我的一票";
+    }
+  });
+
+  document.getElementById("again").addEventListener("click", () => {
+    thanks.hidden = true; form.hidden = false; form.reason.focus();
+  });
+})();
+</script>
+</body>
+</html>
