@@ -64,7 +64,7 @@ header.hero {
 .name .b { color: var(--boy); }
 .name .g { color: var(--girl); }
 .bottles { display: flex; gap: 4px; align-items: flex-end; }
-.duck { width: clamp(52px, 14vw, 76px); height: auto; animation: bob 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+.duck { width: clamp(60px, 16vw, 84px); height: auto; animation: bob 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
 .duck.alt { animation-delay: -1.3s; }
 .duck-wrap { position: relative; display: grid; justify-items: center; }
 .bubble {
@@ -110,7 +110,7 @@ fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
 .guess.boy span { background: var(--boy-soft); color: var(--boy); }
 .guess.girl span { background: var(--girl-soft); color: var(--girl); }
 .guess small { font-family: var(--font-body); font-size: .8rem; color: var(--muted); }
-.guess .glyph { width: 40px; height: auto; margin-bottom: 4px; }
+.guess .glyph { width: 44px; height: auto; margin-bottom: 4px; }
 .guess:hover span { transform: translateY(-3px) rotate(-1deg); }
 .guess.boy input:checked + span { border-color: var(--boy); box-shadow: 0 6px 0 var(--boy); transform: translateY(-3px); }
 .guess.girl input:checked + span { border-color: var(--girl); box-shadow: 0 6px 0 var(--girl); transform: translateY(-3px); }
