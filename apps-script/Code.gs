@@ -10,7 +10,7 @@
 
 const SHEET_NAME = '投票';
 const HEADERS = ['時間', '姓名', '猜測', '理由'];
-const GUESS_LABEL = { boy: '男寶', girl: '女寶' };
+const GUESS_LABEL = { boy: '男生', girl: '女生' };
 
 function getSheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -43,7 +43,8 @@ function readVotes_() {
     votes.push({
       time: time instanceof Date ? time.toISOString() : String(time),
       name: String(name).replace(/^'/, ''),
-      guess: guess === '男寶' ? 'boy' : guess === '女寶' ? 'girl' : String(guess),
+      // 也接受舊版的「男寶／女寶」
+      guess: /^男/.test(guess) ? 'boy' : /^女/.test(guess) ? 'girl' : String(guess),
       reason: String(reason).replace(/^'/, ''),
     });
   }
@@ -63,7 +64,7 @@ function doPost(e) {
     const reason = String(d.reason || '').trim().slice(0, 500);
     const guess = GUESS_LABEL[d.guess];
     if (!name) return json_({ ok: false, error: '請填寫姓名' });
-    if (!guess) return json_({ ok: false, error: '請選擇男寶或女寶' });
+    if (!guess) return json_({ ok: false, error: '請選擇男生或女生' });
     if (!reason) return json_({ ok: false, error: '請寫下你的理由' });
 
     const sh = getSheet_();

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 210" role="img" aria-label="可愛的多多小瓶子">
+  <defs>
+    <clipPath id="body-blue">
+      <path d="M34 26C32 42 30 50 33 62C36 76 45 84 45 98C45 110 30 122 30 148C30 178 44 194 60 194C76 194 90 178 90 148C90 122 75 110 75 98C75 84 84 76 87 62C90 50 88 42 86 26Z"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="60" cy="202" rx="34" ry="6" fill="#000" opacity=".08"/>
+  <!-- bottle body -->
+  <path d="M34 26C32 42 30 50 33 62C36 76 45 84 45 98C45 110 30 122 30 148C30 178 44 194 60 194C76 194 90 178 90 148C90 122 75 110 75 98C75 84 84 76 87 62C90 50 88 42 86 26Z" fill="#FFF9EE" stroke="#E9DCC3" stroke-width="2"/>
+  <!-- label band -->
+  <g clip-path="url(#body-blue)">
+    <rect x="0" y="130" width="120" height="40" fill="#2E6FD8"/>
+    <rect x="0" y="134" width="120" height="3" fill="#fff" opacity=".6"/>
+    <rect x="0" y="163" width="120" height="3" fill="#fff" opacity=".6"/>
+  </g>
+  <text x="60" y="157" text-anchor="middle" font-family="PingFang TC, Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="20" font-weight="700" fill="#fff">多多</text>
+  <!-- shine -->
+  <path d="M40 40C38 52 40 62 44 70" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".9"/>
+  <path d="M38 132C36 144 37 158 41 170" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".5"/>
+  <!-- foil cap -->
+  <rect x="30" y="14" width="60" height="14" rx="5" fill="#2E6FD8"/>
+  <ellipse cx="60" cy="14" rx="30" ry="6" fill="#1F55AE"/>
+  <ellipse cx="52" cy="13" rx="10" ry="2.5" fill="#fff" opacity=".45"/>
+  <!-- face -->
+  <ellipse cx="50" cy="54" rx="5" ry="6.5" fill="#2B2350"/>
+  <ellipse cx="70" cy="54" rx="5" ry="6.5" fill="#2B2350"/>
+  <circle cx="52" cy="51.5" r="2" fill="#fff"/>
+  <circle cx="72" cy="51.5" r="2" fill="#fff"/>
+  <ellipse cx="42" cy="66" rx="6" ry="4" fill="#FF7FA0" opacity=".6"/>
+  <ellipse cx="78" cy="66" rx="6" ry="4" fill="#FF7FA0" opacity=".6"/>
+  <path d="M54 66Q60 73 66 66" stroke="#2B2350" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>

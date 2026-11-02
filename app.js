@@ -1,5 +1,5 @@
 // 共用：讀取票數、畫出票數條與理由清單
-const LABEL = { boy: "男寶", girl: "女寶" };
+const LABEL = { boy: "男生", girl: "女生" };
 
 async function fetchVotes() {
   const res = await fetch(window.VOTE_API_URL, { method: "GET" });
@@ -27,8 +27,8 @@ function renderTally(el, votes) {
   const total = c.boy + c.girl;
   const pb = total ? Math.round((c.boy / total) * 100) : 50;
   el.innerHTML = `
-    <div class="tally-labels"><span class="b">男寶 ${c.boy} 票</span><span class="g">${c.girl} 票 女寶</span></div>
-    <div class="bar" role="img" aria-label="男寶 ${c.boy} 票，女寶 ${c.girl} 票">
+    <div class="tally-labels"><span class="b">男生 ${c.boy} 票</span><span class="g">${c.girl} 票 女生</span></div>
+    <div class="bar" role="img" aria-label="男生 ${c.boy} 票，女生 ${c.girl} 票">
       <div class="b" style="width:${pb}%"></div><div class="g" style="width:${100 - pb}%"></div>
     </div>
     <p class="muted">共 ${total} 人投票</p>`;

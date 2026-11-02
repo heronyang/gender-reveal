@@ -7,7 +7,7 @@
 <meta name="description" content="猜猜多多是男生還是女生？猜對就有機會抽中煙波大飯店溫泉住宿券！">
 <meta property="og:title" content="多多性別大猜謎 💙🩷">
 <meta property="og:description" content="猜猜多多是男生還是女生？猜對就有機會抽中煙波大飯店溫泉住宿券！">
-<link rel="icon" href="duck.svg" type="image/svg+xml">
+<link rel="icon" href="bottle-red.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;700&display=swap">
@@ -18,12 +18,15 @@
   <header class="hero">
     <div class="hero-text">
       <p class="eyebrow">多多性別大猜謎</p>
-      <h1><span class="name">多多</span>是<span class="name"><span class="b">男寶</span></span>，<br>還是<span class="name"><span class="g">女寶</span></span>？</h1>
-      <p class="lede">我們家的新成員「多多」就快揭曉了！請投下你的一票，並告訴我們你為什麼這樣猜。夢到的、看肚子形狀的、純靠直覺的都可以。</p>
+      <h1><span class="name">多多</span>是<span class="name"><span class="b">男生</span></span>，<br>還是<span class="name"><span class="g">女生</span></span>？</h1>
+      <p class="lede">小名「養樂多」的多多就快揭曉了！請投下你的一票，並告訴我們你為什麼這樣猜。夢到的、看肚子形狀的、純靠直覺的都可以。</p>
     </div>
     <div class="duck-wrap">
       <span class="bubble">猜猜我是誰？</span>
-      <img class="duck" src="duck.svg" alt="戴水手帽的小鴨" width="150" height="158">
+      <div class="bottles">
+        <img class="duck" src="bottle-blue.svg" alt="藍色的多多小瓶子" width="72" height="126">
+        <img class="duck alt" src="bottle-red.svg" alt="紅色的多多小瓶子" width="72" height="126">
+      </div>
     </div>
   </header>
 
@@ -56,11 +59,11 @@
       <div class="guesses">
         <label class="guess boy">
           <input type="radio" name="guess" id="guess-boy" value="boy" required>
-          <span><b class="glyph" aria-hidden="true">♂</b>男寶<small>小王子</small></span>
+          <span><img class="glyph" src="bottle-blue.svg" alt="" width="40" height="70">男生<small>小王子</small></span>
         </label>
         <label class="guess girl">
           <input type="radio" name="guess" id="guess-girl" value="girl">
-          <span><b class="glyph" aria-hidden="true">♀</b>女寶<small>小公主</small></span>
+          <span><img class="glyph" src="bottle-red.svg" alt="" width="40" height="70">女生<small>小公主</small></span>
         </label>
       </div>
     </fieldset>
@@ -123,7 +126,7 @@
       reason: form.reason.value.trim(),
     };
     if (!vote.name) return showError("請填寫你的名字。"), form.name.focus();
-    if (!vote.guess) return showError("請選擇男寶或女寶。");
+    if (!vote.guess) return showError("請選擇男生或女生。");
     if (!vote.reason) return showError("請寫一句你的理由，讓大家笑一下！"), form.reason.focus();
 
     btn.disabled = true; btn.textContent = "送出中…";
